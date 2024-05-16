@@ -1,0 +1,261 @@
+/*Proyecto purueba senasof
+
+
+CREATE DATABASE manzanas_del_cuidado;
+USE manzanas_del_cuidado;
+
+-- Crear tabla tipo_documento
+CREATE TABLE tipo_documento (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
+
+-- Crear tabla municipios
+CREATE TABLE municipios (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(50) NOT NULL,
+    nombre VARCHAR(100) NOT NULL
+);
+
+-- Crear tabla manzanas
+CREATE TABLE manzanas (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(50) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    localidad VARCHAR(100) NOT NULL,
+    direccion VARCHAR(100) NOT NULL,
+    id_municipio INT NOT NULL,
+    FOREIGN KEY (id_municipio) REFERENCES municipios(id)
+);
+
+
+
+-- Crear tabla categorias_servicios
+CREATE TABLE categorias_servicios (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(255)
+);
+
+-- Crear tabla servicios
+CREATE TABLE servicios (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(50) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(255),
+    id_categoria INT NOT NULL,
+    FOREIGN KEY (id_categoria) REFERENCES categorias_servicios(id)
+);
+
+-- Crear tabla establecimiento_servicio
+CREATE TABLE establecimiento_servicio (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(50) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    responsable VARCHAR(100) NOT NULL,
+    direccion VARCHAR(100) NOT NULL,
+    id_servicio INT NOT NULL,
+    FOREIGN KEY (id_servicio) REFERENCES servicios(id)
+);
+
+-- Crear tabla mujeres
+CREATE TABLE mujeres (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_tipo_documento INT NOT NULL,
+    documento VARCHAR(20) NOT NULL,
+    nombres VARCHAR(100) NOT NULL,
+    apellidos VARCHAR(100) NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    correo_electronico VARCHAR(50) NOT NULL,
+    ciudad VARCHAR(100) NOT NULL,
+    direccion VARCHAR(100) NOT NULL,
+    ocupacion VARCHAR(50) NOT NULL,
+    servicios_interes VARCHAR(255) NOT NULL,
+    FOREIGN KEY (id_tipo_documento) REFERENCES tipo_documento(id)
+);
+
+-- Crear tabla propuestas
+CREATE TABLE propuestas (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_mujer INT NOT NULL,
+    id_manzana INT NOT NULL,
+    id_servicio INT NOT NULL,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    FOREIGN KEY (id_mujer) REFERENCES mujeres(id),
+    FOREIGN KEY (id_manzana) REFERENCES manzanas(id),
+    FOREIGN KEY (id_servicio) REFERENCES servicios(id)
+);
+
+-- Mostrar bases de datos
+SHOW DATABASES;
+Las Manzanas del Cuidado son espacios de la ciudad en los que se brinda tiempo y
+servicios a las mujeres y a sus familias.
+En las Manzanas del Cuidado las cuidadoras tienen tiempo y servicios gratuitos,
+aquí pueden estudiar, emprender, emplearse, descansar, ejercitarse, recibir
+orientación y asesoría jurídica y psicológica, lavar su ropa y la de su familia en
+lavanderías comunitarias, todo totalmente gratis.
+Las Manzanas son áreas de la ciudad en las que se tiene la infraestructura y
+servicios para atender de manera próxima y simultánea a las cuidadoras y a sus
+familias. Por ejemplo, en una Manzana del Cuidado las cuidadoras y quienes ellas
+cuidan pueden encontrar colegios, jardines, parques, hospitales, centros de atención
+para personas mayores.
+
+3. Requerimientos
+
+Se debe realizar un sistema de información web que tenga en cuenta los siguientes requisitos:
+● El sistema debe permitir el registro de Municipios que cuentan con una o
+varias manzanas del cuidado.
+
+● Las manzanas deben registrar: Código, nombre, localidad y dirección
+
+● El sistema debe permitir ver las manzanas en un mapa y mostrar una tarjeta
+con la información de estas.
+
+● Las manzanas cuentas con diferentes tipos de servicios, categorías de
+servicios y servicios de los cuales se requiere mínimo información como
+código, nombre, descripción
+
+● Así mismo de cada servicio puede contar con establecimientos que les
+prestan la infraestructura y dar un mejor servicio con más calidad. De los
+establecimientos se desea guardar un código, nombre, responsable,
+dirección.
+
+● Una vez se haya realizado el registro en el sistema se debe contar con una
+página que permita a la mujer cuidadora proponer la manzana, servicio y día
+y hora que podría asistir.
+
+● De las mujeres se requiere guardar: Tipo de documento, Documento,
+  Nombres, Apellidos, teléfono, correo electrónico, Ciudad, dirección,
+  ocupación, servicios en los que le gustaría participar
+
+● El sistema debe tener un Login, un método para restaurar contraseña
+
+● Todos los formularios deben contar con validaciones y mensajes de alerta
+
+● El sistema de información debe permitir hacer el CRUD para cada uno de los
+módulos
+
+CREAR TABLAS Y SUS RESPECTIVOS ATRIBUTOS NECESARIOS
+
+Municipios: id ,codigo,nombre
+Manzanas:id,Código, nombre, localidad y dirección
+servicios:id,nombre,descripcion
+establecimiento_servicio:id, código, nombre, responsable,dirección.
+tipo_documento:id nombre
+mujeres: id, Tipo de documento, Documento,Nombres, Apellidos, teléfono, correo electrónico,Ciudad, dirección,ocupación, servicios en los que le gustaría participar
+
+*/
+
+
+CREATE DATABASE prueba;
+USE prueba;
+
+CREATE TABLE municipios (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(100),
+  localidad VARCHAR(100)
+);
+
+CREATE TABLE manzanascuidado (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  codigo VARCHAR(10),
+  nombre VARCHAR(100),
+  localidad VARCHAR(100),
+  direccion VARCHAR(200),
+  idmunicipio INT,
+  FOREIGN KEY (idmunicipio) REFERENCES municipios(id)
+);
+
+CREATE TABLE categoriasservicios (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(100)
+);
+
+CREATE TABLE servicios (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  codigo VARCHAR(10),
+  nombre VARCHAR(100),
+  descripcion TEXT,
+  idcategoriaservicio INT,
+  idmanzanacuidado INT,
+  FOREIGN KEY (idcategoriaservicio) REFERENCES categoriasservicios(id),
+  FOREIGN KEY (idmanzanacuidado) REFERENCES manzanascuidado(id)
+);
+
+CREATE TABLE establecimientos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  codigo VARCHAR(10),
+  nombre VARCHAR(100),
+  responsable VARCHAR(100),
+  direccion VARCHAR(200),
+  idservicio INT,
+  FOREIGN KEY (idservicio) REFERENCES servicios(id)
+);
+
+CREATE TABLE  documentosTipo(id INT PRIMARY KEY  AUTO_INCREMENT ,
+              nombre VARCHAR(100)
+              );
+              
+CREATE TABLE mujerescuidadoras (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  tipodocumento INT,
+  documento VARCHAR(20),
+  nombres VARCHAR(100),
+  apellidos VARCHAR(100),
+  telefono VARCHAR(20),
+  correoelectronico VARCHAR(100),
+  ciudad VARCHAR(100),
+  direccion VARCHAR(200),
+  ocupacion VARCHAR(100),
+  serviciosinteres VARCHAR(200),
+  contrasena VARCHAR(100),
+  FOREIGN KEY(tipodocumento) REFERENCES documentosTipo(id)
+);
+
+CREATE TABLE propuestasasistencia (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  idmujercuidadora INT,
+  idmanzanacuidado INT,
+  idservicio INT,
+  dia DATE,
+  hora TIME,
+  FOREIGN KEY (idmujercuidadora) REFERENCES mujerescuidadoras(id),
+  FOREIGN KEY (idmanzanacuidado) REFERENCES manzanascuidado(id),
+  FOREIGN KEY (idservicio) REFERENCES servicios(id)
+);
+
+
+/*INSERT INTO categoriasservicios(nombre)values("estudiar"),
+                                                ("emplearse"),
+                                                ("descansar"),
+                                                ("asesoría jurídica"),
+                                                ("psicológica"),
+                                                ("ejercitarse"),
+                                                ("recibir orientación"),
+                                                ("emprender");*/
+                                                
+
+INSERT INTO municipios (nombre, localidad) VALUES
+('Valledupar', 'Cesar, Colombia'),
+('Fonseca', 'La guajira, Colombia'),
+('Sanjuan del cesar', 'La Guajira, Colombia');
+
+
+INSERT INTO manzanascuidado (codigo, nombre, localidad, direccion, idmunicipio) VALUES
+('1233256', 'Manzanas Cuidado Fonseca', 'Asadero Río Limón', 'Cl. 14 #17-40, Fonseca, La Guajira', 2),
+('123433', 'Manzanas Cuidado Sanjuan del cesar', 'HOTEL PROVINCIA PLAZA', 'Cra. 6 #2-19, San Juan Del Cesar, La Guajira',3),
+
+('343012', 'Manzanas Cuidado valledupar', 'Parque Garupal', 'Manzana 64 casa 7 barrio garupal etapa 2, Valledupar, Cesar', 1),
+('789012', 'Manzanas Cuidado valledupar', 'Los Fundadores', 'Tv. 25 #20b-87 a, Valledupar, Cesar', 1);
+
+
+INSERT INTO servicios (codigo, nombre, descripcion, idcategoriaservicio, idmanzanacuidado) VALUES();
+
+INSERT INTO servicios (codigo, nombre, descripcion, idcategoriaservicio, idmanzanacuidado) VALUES
+('S001', 'Taller de Emprendimiento', 'Taller para desarrollar habilidades emprendedoras', 8, 1),
+
+('S002', 'Asesoría Psicológica', 'Sesiones de asesoría psicológica individual', 5,1),
+('S003', 'Clase de Yoga', 'Clase grupal de yoga para relajación', 3,2),
+('S004', 'Taller de Búsqueda de Empleo', 'Taller para mejorar habilidades de empleabilidad', 2, 3),
+('S005', 'Asesoría Legal', 'Asesoría legal en temas laborales', 4, 4);
