@@ -147,7 +147,6 @@ mujeres: id, Tipo de documento, Documento,Nombres, Apellidos, teléfono, correo 
 
 */
 
-
 CREATE DATABASE prueba;
 USE prueba;
 
@@ -174,7 +173,6 @@ CREATE TABLE categoriasservicios (
 
 CREATE TABLE servicios (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  codigo VARCHAR(10),
   nombre VARCHAR(100),
   descripcion TEXT,
   idcategoriaservicio INT,
@@ -193,13 +191,10 @@ CREATE TABLE establecimientos (
   FOREIGN KEY (idservicio) REFERENCES servicios(id)
 );
 
-CREATE TABLE  documentosTipo(id INT PRIMARY KEY  AUTO_INCREMENT ,
-              nombre VARCHAR(100)
-              );
-              
+
+									  
 CREATE TABLE mujerescuidadoras (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  tipodocumento INT,
   documento VARCHAR(20),
   nombres VARCHAR(100),
   apellidos VARCHAR(100),
@@ -209,8 +204,7 @@ CREATE TABLE mujerescuidadoras (
   direccion VARCHAR(200),
   ocupacion VARCHAR(100),
   serviciosinteres VARCHAR(200),
-  contrasena VARCHAR(100),
-  FOREIGN KEY(tipodocumento) REFERENCES documentosTipo(id)
+  contrasena VARCHAR(100)
 );
 
 CREATE TABLE propuestasasistencia (
@@ -226,15 +220,7 @@ CREATE TABLE propuestasasistencia (
 );
 
 
-/*INSERT INTO categoriasservicios(nombre)values("estudiar"),
-                                                ("emplearse"),
-                                                ("descansar"),
-                                                ("asesoría jurídica"),
-                                                ("psicológica"),
-                                                ("ejercitarse"),
-                                                ("recibir orientación"),
-                                                ("emprender");*/
-                                                
+
 
 INSERT INTO municipios (nombre, localidad) VALUES
 ('Valledupar', 'Cesar, Colombia'),
@@ -249,13 +235,76 @@ INSERT INTO manzanascuidado (codigo, nombre, localidad, direccion, idmunicipio) 
 ('343012', 'Manzanas Cuidado valledupar', 'Parque Garupal', 'Manzana 64 casa 7 barrio garupal etapa 2, Valledupar, Cesar', 1),
 ('789012', 'Manzanas Cuidado valledupar', 'Los Fundadores', 'Tv. 25 #20b-87 a, Valledupar, Cesar', 1);
 
+INSERT INTO categoriasservicios(nombre)values("Estudiar"),
+                                                ("Emplearse"),
+                                                ("Descansar"),
+                                                ("Asesoría jurídica"),
+                                                ("Psicológica"),
+                                                ("Ejercitarse"),
+                                                ("Recibir orientación"),
+                                                ("Emprender");
+                                                
 
-INSERT INTO servicios (codigo, nombre, descripcion, idcategoriaservicio, idmanzanacuidado) VALUES();
 
-INSERT INTO servicios (codigo, nombre, descripcion, idcategoriaservicio, idmanzanacuidado) VALUES
-('S001', 'Taller de Emprendimiento', 'Taller para desarrollar habilidades emprendedoras', 8, 1),
 
-('S002', 'Asesoría Psicológica', 'Sesiones de asesoría psicológica individual', 5,1),
-('S003', 'Clase de Yoga', 'Clase grupal de yoga para relajación', 3,2),
-('S004', 'Taller de Búsqueda de Empleo', 'Taller para mejorar habilidades de empleabilidad', 2, 3),
-('S005', 'Asesoría Legal', 'Asesoría legal en temas laborales', 4, 4);
+
+
+INSERT INTO servicios (nombre, descripcion, idcategoriaservicio, idmanzanacuidado) VALUES
+('Tutoría Académica', 'Sesiones individuales de tutoría académica', 1, 1),
+('Club de Lectura', 'Encuentros grupales para discutir libros y fomentar la lectura', 1, 2),
+('Curso de Idiomas', 'Clases grupales para aprender un nuevo idioma', 1, 3),
+('Taller de Escritura Creativa', 'Sesiones prácticas para desarrollar habilidades de escritura creativa', 1, 4),
+('Clase de Matemáticas', 'Clases individuales para reforzar conocimientos en matemáticas', 1, 1);
+
+
+INSERT INTO servicios (nombre, descripcion, idcategoriaservicio, idmanzanacuidado) VALUES
+('Entrenamiento de Entrevista', 'Simulación de entrevistas y consejos para mejorar habilidades de entrevista', 2, 2),
+('Taller de Desarrollo Profesional', 'Sesiones grupales para mejorar habilidades profesionales', 2, 3),
+('Asesoría para CV', 'Asesoramiento individualizado para la elaboración de currículum vitae', 2, 4),
+('Charlas de Networking', 'Encuentros grupales para establecer contactos profesionales', 2, 1),
+('Curso de Habilidades Gerenciales', 'Clases grupales para desarrollar habilidades de liderazgo y gestión', 2, 2);
+
+INSERT INTO servicios (nombre, descripcion, idcategoriaservicio, idmanzanacuidado) VALUES
+('Masajes Relajantes', 'Sesiones individuales de masajes para aliviar el estrés y la tensión muscular', 3, 3),
+('Retiro Espiritual', 'Encuentro grupal para desconectar y conectar con la paz interior', 3, 1),
+('Taller de Mindfulness', 'Sesiones grupales para aprender técnicas de atención plena y reducción del estrés', 3, 2);
+
+-- Servicios adicionales para la categoría "Asesoría jurídica"
+INSERT INTO servicios (nombre, descripcion, idcategoriaservicio, idmanzanacuidado) VALUES
+('Asesoría Legal para Inmigrantes', 'Asesoramiento legal específico para personas inmigrantes', 4, 4),
+('Defensa Penal', 'Asesoramiento y representación legal en casos penales', 4, 3),
+('Asesoría en Derecho Civil', 'Consultoría legal para asuntos relacionados con el derecho civil', 4, 2);
+
+-- Servicios adicionales para la categoría "Psicológica"
+INSERT INTO servicios (nombre, descripcion, idcategoriaservicio, idmanzanacuidado) VALUES
+('Terapia de Pareja', 'Sesiones de terapia dirigidas a parejas para mejorar la relación', 5, 1),
+('Grupo de Apoyo Emocional', 'Encuentros grupales para compartir experiencias y recibir apoyo emocional', 5, 3),
+('Taller de Autoestima', 'Sesiones grupales para trabajar en el fortalecimiento de la autoestima', 5, 4);
+
+-- Servicios adicionales para la categoría "Ejercitarse"
+INSERT INTO servicios (nombre, descripcion, idcategoriaservicio, idmanzanacuidado) VALUES
+('Entrenamiento Funcional', 'Clases grupales enfocadas en mejorar la fuerza y resistencia física', 6, 2),
+('Yoga al Aire Libre', 'Sesiones de yoga realizadas en espacios naturales para conectar cuerpo y mente', 6, 1),
+('Clase de Pilates', 'Clases grupales para fortalecer el cuerpo y mejorar la flexibilidad', 6, 3);
+
+-- Servicios adicionales para la categoría "Recibir orientación"
+INSERT INTO servicios (nombre, descripcion, idcategoriaservicio, idmanzanacuidado) VALUES
+('Asesoramiento Espiritual', 'Sesiones individuales para recibir orientación espiritual y reflexión personal', 7, 4),
+('Asesoría Vocacional', 'Consultoría individualizada para la elección de carrera profesional', 7, 1),
+('Taller de Desarrollo Personal', 'Sesiones grupales para trabajar en el crecimiento personal y la autorealización', 7, 3);
+
+
+INSERT INTO servicios (nombre, descripcion, idcategoriaservicio, idmanzanacuidado) VALUES
+('Mentoría Empresarial', 'Asesoramiento individualizado para emprendedores en la gestión de sus proyectos', 8, 2),
+('Taller de Marketing Digital', 'Sesiones grupales para aprender estrategias de marketing en entornos digitales', 8, 3),
+('Curso de Finanzas para Emprendedores', 'Clases grupales para entender los aspectos financieros en la gestión de un negocio', 8, 1);
+
+SELECT  distinct nombre  FROM servicios;
+SELECT * FROM categoriasservicios;
+
+SELECT servicios.nombre AS servicio, categoriasservicios.nombre AS categoria
+FROM categoriasservicios
+INNER JOIN servicios ON categoriasservicios.id = servicios.idcategoriaservicio
+WHERE categoriasservicios.nombre = 'Estudiar';
+
+SELECT * FROM establecimientos;

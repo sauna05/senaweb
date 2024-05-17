@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +7,6 @@
     <style>
         body{
             background-color: #A6CEC4;
-          
         }
         .menu{
             margin: 5px;
@@ -49,48 +46,78 @@
             width: 900px;
             border: 4px solid gray;
             left: 23vw;
-            height: 500px;
+            height: auto;
             background-color: #45956A;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
         }
         h3{
             color: #2A4383;
-            margin: 6px;
-            left: 40vw;
+            margin: 6px auto;
+            width: 100%;
+            text-align: center;
         }
-        form{
-            position: relative;
-            justify-content:center ;
-            left: 110px;
+        label {
+            width: 200px;
+            margin-bottom: 10px;
+            color: white;
+            display: inline-block;
+            text-align: center;            
         }
-        
-
+        input {
+            height: 30px;
+            border-radius: 6px ;
+            margin-bottom: 10px;
+            padding: 5px;
+            
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: auto;
+            margin-left: auto;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
     </style>
 </head>
 <body>
-    <div class="menu" >
+    <div class="menu">
         <img class="logo" src="imagenes/logo_manzanas.png" alt="">
-        <a class="servicios" href="servicios.php"> Manzanas del cuidado </a>
-        <a class="manzanas" href="servicios.php"> servicios gratuitos</a>
-   
+        <a class="servicios" href="principal.php">Manzanas del cuidado</a>
+        <a class="manzanas" href="servicios.php">Servicios gratuitos</a>
+    </div>
     
-   <div class="registro">
-   <h3> Registre sus Datos aqui</h3>
-    <form  method="post" >
-        <label for="">Tipo de documento</label>
-        <br>
-        <input type="text">
-        <br>
-        <label for="">Documento</label>
-        <br>
-        <input type="text" placeholder="numero documento">
-        <br>
-        <label for="">Nombres</label>
-        <br>
-        <input type="text"placeholder="Nombre completo">
-    </form>
-
-    
-   </div> 
-    
+    <div class="registro">
+        <h3>Registre sus Datos aquí</h3>
+        <form method="post" action="registro.php" >
+            <label for="documento">Documento:</label>
+            <input type="text" name="documento" placeholder="Número de documento" required>
+            <label for="nombres">Nombres:</label>
+            <input type="text" name="nombres" placeholder="Nombre completo" required>
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" name="apellidos" placeholder="Apellidos" required>
+            <label for="telefono">Teléfono:</label>
+            <input type="text" name="telefono" placeholder="Su número de teléfono" required>
+            <label for="ciudad">Ciudad:</label>
+            <input type="text" name="ciudad" placeholder="Ciudad donde vive" required>
+            <label for="direccion">Dirección:</label>
+            <input type="text" name="direccion" placeholder="Dirección" required>
+            <label for="ocupacion">Ocupación:</label>
+            <input type="text" name="ocupacion" placeholder="Ingrese una ocupación" required>
+            <label for="servicios">Servicios de interés:</label>
+            <input type="text" name="servicios" required>
+            <label for="correo">Correo electrónico:</label>
+            <input type="email" name="correo" placeholder="Su correo" required>
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" name="contrasena" placeholder="Su contraseña" required>
+            <br>
+            <br>
+            <input type="submit" value="Registrar Datos">
+            <br>
+            <a href="login.php">si ya estas registrado . inicia session aqui</a>
+        </form>
+    </div>
 </body>
 </html>

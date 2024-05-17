@@ -4,10 +4,10 @@ class Ini_sesion{
     public static function iniciar($correo_electronico,$contrasena){
         try{
             $conexion = new Conexion();
-            $sql_consulta="select id from mujerescuidadoras where correo_electronico=:correo_electronico
+            $sql_consulta="select id from mujerescuidadoras where correoelectronico=:correoelectronico
             and contrasena=:contrasena";
             $stm= $conexion->conexion->prepare($sql_consulta);
-            $stm->bindParam(':correo_electronico',$correo_electronico);
+            $stm->bindParam(':correoelectronico',$correo_electronico);
             $stm->bindParam(':contrasena',$contrasena);
             $stm->execute();
             if($usuario =$stm->fetch(PDO::FETCH_ASSOC)){
@@ -27,7 +27,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $correo=$_POST['correo'];
     $contrasenia=$_POST['contrasena'];
     if(Ini_sesion::iniciar($correo,$contrasenia)){
-        header('location:principal.php');
+        header('location:elegir.php');
         exit;
     }
 }
@@ -116,7 +116,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <body >
 <div class="menu" >
         <img class="logo" src="imagenes/logo_manzanas.png" alt="">
-        <a class="servicios" href="servicios.php"> Manzanas del cuidado </a>
+        <a class="servicios" href="principal.php"> Manzanas del cuidado </a>
         <a class="manzanas" href="servicios.php"> servicios gratuitos</a>
    
     
